@@ -13,7 +13,7 @@ class App extends Component {
   render() {
     const { history, store } = this.props;
     return (
-      <Router routes={routes(store)} history={history} />
+      <Router routes={routes} history={history} />
     );
   }
 }

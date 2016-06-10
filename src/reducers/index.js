@@ -1,17 +1,17 @@
 import {combineReducers} from 'redux';
-import user from './userReducer';
-import routesPermissions from './routesPermissionsReducer';
-import auth from './authReducer';
 
+import userAnswers from './userAnswersReducer';
+import current from './currentReducer';
+import questions from './questionsReducer';
 import ajaxCallsInProgress from './ajaxStatusReducer';
 import { routerReducer } from 'react-router-redux';
 
 
 const rootReducer = combineReducers({
   routing: routerReducer,
-  routesPermissions,
-  user,
-  auth,
+  questions,
+  current,
+  userAnswers,
   ajaxCallsInProgress
 });
 

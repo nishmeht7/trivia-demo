@@ -1,14 +1,15 @@
 import React from 'react';
-import {Link} from 'react-router';
+import QuestionList from './QuestionList';
 
-const HomePage = () => {
+const TriviaPage = () => {
   return (
-    <div className="jumbotron">
-      <h1>React Redux Firebase Starter</h1>
-      <p>This is an starter project to make your life easier</p>
-      <Link to="about" className="btn btn-primary btn-lg">Learn more</Link>
+    <div>
+      <div className="page-header">
+        <h2>Try answer this 5 questions</h2>
+      </div>
+      <QuestionList />
     </div>
   );
 };
 
-export default HomePage;
+export default TriviaPage;

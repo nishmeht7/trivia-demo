@@ -1,57 +1,37 @@
-const time1 = Date.now();
 // modules
 import {AppContainer} from 'react-hot-loader';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Loader from 'react-loader';
 import {Provider} from 'react-redux';
 import {syncHistoryWithStore} from 'react-router-redux';
 import {browserHistory} from 'react-router';
 
-// api
-import FirebaseApi from './api/firebase';
-
-// actions
-import {authInitialized} from './actions/authActions';
-import {ajaxCallError, beginAjaxCall} from './actions/ajaxStatusActions';
-
 // components
 import App from './components/App';
+
+// actions
+import * as questionActions from './actions/questionsActions';
 
 // Store
 import initialState from './reducers/initialState';
 import configureStore from './store/configureStore'; //eslint-disable-line import/default
 
 // styles
-import './styles/styles.css'; //Webpack can import CSS files too!
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/toastr/build/toastr.min.css';
+import '../node_modules/bootswatch/cosmo/bootstrap.min.css';
+import '../node_modules/font-awesome/css/font-awesome.min.css';
+import './styles/styles.css'; //Webpack can import CSS files too!
 
 // store initialization
 const store = configureStore(initialState);
+store.dispatch(questionActions.loadQuestions());
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
 const rootEl = document.getElementById('root');
 
-// // render an initial loading
-// ReactDOM.render(
-//   <div className="container-fluid container-loading">
-//     <div className="row loading-row">
-//       <div className="loading">
-//         <Loader loaded={false} width={30} radius={70} color="#000" className="spinner" scale={0.50}/>
-//       </div>
-//     </div>
-//   </div>,
-//   rootEl
-// );
-
 // Initialize Firebase Auth and then start the app
-store.dispatch(beginAjaxCall());
-FirebaseApi.initAuth()
-  .then(
-    user => {
-      store.dispatch(authInitialized(user));
 
       ReactDOM.render(
         <AppContainer>
@@ -77,10 +57,4 @@ FirebaseApi.initAuth()
           );
         });
       }
-    })
-  .catch(
-    error => {
-      store.dispatch(ajaxCallError());
-      console.error('error while initializing Firebase Auth'); // eslint-disable-line no-console
-      console.error(error); // eslint-disable-line no-console
-    });
+

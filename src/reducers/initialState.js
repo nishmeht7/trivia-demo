@@ -1,20 +1,14 @@
 export default {
-  routesPermissions: {
-    requireAuth: [
-      '/admin'
-    ],
-    routesRequireAdmin: [
-      '/admin'
-    ]
-  },
   routing: {},
-  user: {
-    isAdmin: undefined
+  questions: [],
+  current: {
+    uid: 0,
+    userAnswer: 0,
+    correctAnswer: 0
   },
-  auth: {
-    isLogged: false,
-    currentUserUID: null,
-    initialized: false
+  userAnswers: {
+    correct: 0,
+    wrong: 0
   },
   ajaxCallsInProgress: 0
 };

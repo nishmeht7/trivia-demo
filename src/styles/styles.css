@@ -1,58 +1,63 @@
-/* Styles */
-html, body, #root, .container-loading {
-  height: 100%;
+.navbar .navbar-nav {
+  display: inline-block;
+  float: none;
 }
 
-#app {
-  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color: #4d4d4d;
-  min-width: 550px;
-  max-width: 850px;
-  margin: 0 auto;
+.navbar {
+  text-align: center;
 }
 
-a.active {
-  color: orange;
+.page-header {
+  margin-top: 90px;
+  text-align: center;
 }
 
-nav {
-  padding-top: 20px;
+.question-wrapper {
+  margin: 10px auto;
+  max-width: 500px;
 }
 
-.container-loading {
-  display: table;
-  table-layout: fixed;
-  width: 100%;
+.panel-title {
+  font-size: 25px;
 }
 
-.loading {
-  width: 100px;
-  height: 100px;
-  margin: 0 auto;
+.panel-body .well input[type="radio"] {
+  margin-right: 5px;
 }
 
-.loading-row {
-  background-color: #fff;
-  min-height: 100%;
-  height: 100%;
-  display:table-cell;
-  vertical-align:middle;
-  text-align:center;
-  width: 100%;
+.well label {
+  font-weight: normal;
+  padding: 5px 0;
 }
 
-.loading div {
-  width: inherit !important;
+.well .label {
+  font-size: 15px;
+  margin: 5px 5px;
+  display: inline-block;
+  float: right;
 }
 
-.loading svg {
+.panel-footer i.answer-icon {
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: -3px;
+}
+
+.panel-footer i.fa-arrow-right {
+  margin-right: 10px;
+}
+
+.panel-footer .alert {
+  margin: 10px auto;
+}
+
+.panel-footer p {
+  overflow: hidden;
+  padding: 10px 0 5px 0;
+}
+
+.panel-footer button {
+  float: right;
   display: block;
-  width: 100px;
-  margin: 0 auto;
-}
-
-.h1-loading {
-  color: #fff;
-  font-size: 6rem;
-  line-height: 8rem;
 }
