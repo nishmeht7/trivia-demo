@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Choice from './Choice';
+import QuestionResultMessage from './QuestionResultMessage';
+import TriviaResultMessage from './TriviaResultMessage';
 import * as questionActions from '../../actions/questionsActions';
 
 class QuestionList extends Component {
@@ -18,6 +20,10 @@ class QuestionList extends Component {
 
   showAnswer() {
     return this.props.current.correctAnswer ? '' : 'hide';
+  }
+
+  showResult() {
+    return this.props.current.correctAnswer && this.props.current.index === 4 ? '' : 'hide';
   }
 
   nextQuestion() {
@@ -64,6 +70,11 @@ class QuestionList extends Component {
     return this.userWon() ? 'fa-thumbs-o-up ' + resultMessageIcon : 'fa-thumbs-o-down ' + resultMessageIcon;
   }
 
+  getSummaryMessageClass() {
+    let resultMessageClass = this.showResult();
+    return this.userWon() ? 'alert alert-success ' + resultMessageClass : 'alert alert-danger ' + resultMessageClass;
+  }
+
   render() {
     let title = this.props.question.header.title;
     let choices = this.props.question.choices.map((choice, index) => {
@@ -77,6 +88,8 @@ class QuestionList extends Component {
     });
     return (
       <div className="question-list">
+        <TriviaResultMessage className={this.getSummaryMessageClass()} icon={this.getResultMessageIcon()}
+                             message={this.getResultMessage()} onClickNext={this.nextQuestion}/>
         <div className="question-wrapper">
           <div className="panel panel-primary">
             <div className="panel-heading">
@@ -85,16 +98,8 @@ class QuestionList extends Component {
             <div className="panel-body">
               {choices}
             </div>
-            <div className="panel-footer">
-              <div className={this.getResultMessageClass()}>
-                <p><i className={this.getResultMessageIcon()} aria-hidden="true"/>{this.getResultMessage()}
-                  <button className="btn btn-default btn-sm" onClick={this.nextQuestion}>
-                    <i className="fa fa-arrow-right" aria-hidden="true"/>Next
-                  </button>
-                  .
-                </p>
-              </div>
-            </div>
+            <QuestionResultMessage className={this.getResultMessageClass()} icon={this.getResultMessageIcon()}
+                                   message={this.getResultMessage()} onClickNext={this.nextQuestion}/>
           </div>
         </div>
       </div>

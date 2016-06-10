@@ -15,6 +15,13 @@ export function userAnswered(answer) {
   return {type: types.USER_ANSWERED, answer};
 }
 
+export function userAnsweredCorrectly() {
+  return {type: types.USER_ANSWERED_CORRECTLY};
+}
+export function userAnsweredInCorrectly() {
+  return {type: types.USER_ANSWERED_INCORRECTLY};
+}
+
 export function loadCorrectAnswerSuccess(correctAnswer) {
   return {type: types.LOAD_CORRECT_ANSWER_SUCCESS, correctAnswer};
 }
@@ -32,10 +39,15 @@ export function loadQuestions() {
 }
 
 export function userAnswer(questionAnswer) {
-  return dispatch => {
+  return (dispatch, getState) => {
     dispatch(userAnswered(questionAnswer.answer));
     return QuestionsApi.getAnswer(questionAnswer.question).then(answer => {
       dispatch(loadCorrectAnswerSuccess(answer));
+      if(getState().current.userAnswer === answer) {
+        dispatch(userAnsweredCorrectly());
+      } else {
+        dispatch(userAnsweredInCorrectly());
+      }
     }).catch(error => {
       throw(error);
     });

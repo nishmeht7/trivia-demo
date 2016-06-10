@@ -3,6 +3,7 @@ export default {
   questions: [],
   current: {
     uid: 0,
+    index: -1,
     userAnswer: 0,
     correctAnswer: 0
   },

@@ -3,6 +3,10 @@ import initialState from './initialState';
 
 export default function questionsReducer(state = initialState.questions, action) {
   switch (action.type) {
+    case types.USER_ANSWERED_CORRECTLY:
+      return Object.assign({}, state, {correct: state.correct + 1});
+    case types.USER_ANSWERED_INCORRECTLY:
+      return Object.assign({}, state, {wrong: state.wrong + 1});
     default:
       return state;
   }

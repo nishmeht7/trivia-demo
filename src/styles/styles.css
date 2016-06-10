@@ -12,7 +12,8 @@
   text-align: center;
 }
 
-.question-wrapper {
+
+.panel-summary , .question-wrapper {
   margin: 10px auto;
   max-width: 500px;
 }
