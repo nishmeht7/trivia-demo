@@ -4,7 +4,7 @@ import initialState from './initialState';
 export default function questionsReducer(state = initialState.current, action) {
   switch (action.type) {
     case types.LOAD_QUESTIONS_SUCCESS:
-      return Object.assign({}, state, {uid: action.questions[0].uid, index: 0});
+      return Object.assign({}, initialState.current, {uid: action.questions[0].uid, index: 0});
     case types.USER_ANSWERED:
       return Object.assign({}, state, {userAnswer: action.answer});
     case types.LOAD_CORRECT_ANSWER_SUCCESS:

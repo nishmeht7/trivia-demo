@@ -27,12 +27,19 @@ class QuestionList extends Component {
   }
 
   nextQuestion() {
-    console.log('nextQuestion');
     this.props.actions.getNextQuestion();
+  }
+
+  tryAgain() {
+    this.props.actions.loadQuestions();
   }
 
   userWon() {
     return this.props.current.userAnswer === this.props.current.correctAnswer;
+  }
+
+  userWonSummary() {
+    return this.props.userAnswers.correct > this.props.userAnswers.wrong;
   }
 
   getResultLabel(choice) {
@@ -60,6 +67,22 @@ class QuestionList extends Component {
     }
   }
 
+  getSummaryMessage() {
+    if (this.userWonSummary()) {
+      return (
+        <span>
+          <strong>You Rock! </strong> You answered {this.props.userAnswers.correct} questions <strong> correctly of 5</strong>
+        </span>
+      );
+    } else {
+      return (
+        <span>
+          <strong>Try again! </strong> You answered {this.props.userAnswers.wrong} questions <strong> incorrectly of 5</strong>
+        </span>
+      );
+    }
+  }
+
   getResultMessageClass() {
     let resultMessageClass = this.showAnswer();
     return this.userWon() ? 'alert alert-success ' + resultMessageClass : 'alert alert-danger ' + resultMessageClass;
@@ -72,7 +95,7 @@ class QuestionList extends Component {
 
   getSummaryMessageClass() {
     let resultMessageClass = this.showResult();
-    return this.userWon() ? 'alert alert-success ' + resultMessageClass : 'alert alert-danger ' + resultMessageClass;
+    return this.userWonSummary() ? 'alert alert-success ' + resultMessageClass : 'alert alert-danger ' + resultMessageClass;
   }
 
   render() {
@@ -89,7 +112,7 @@ class QuestionList extends Component {
     return (
       <div className="question-list">
         <TriviaResultMessage className={this.getSummaryMessageClass()} icon={this.getResultMessageIcon()}
-                             message={this.getResultMessage()} onClickNext={this.nextQuestion}/>
+                             message={this.getSummaryMessage()} onClickNext={this.tryAgain.bind(this)}/>
         <div className="question-wrapper">
           <div className="panel panel-primary">
             <div className="panel-heading">
@@ -110,6 +133,7 @@ class QuestionList extends Component {
 QuestionList.propTypes = {
   question: React.PropTypes.object.isRequired,
   current: React.PropTypes.object.isRequired,
+  userAnswers: React.PropTypes.object.isRequired,
   actions: React.PropTypes.object.isRequired
 };
 
@@ -135,7 +159,8 @@ function mapStateToProps(state, ownProps) {
 
   return {
     question: question,
-    current: state.current
+    current: state.current,
+    userAnswers: state.userAnswers
   };
 }
 

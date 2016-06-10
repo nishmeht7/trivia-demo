@@ -5,11 +5,11 @@ const TriviaResultMessage = ({className, icon, message, onClickNext}) => {
     <div className="panel-footer panel-summary">
       <div className={className}>
         <p><i className={icon} aria-hidden="true"/>{message}
-          <button className="btn btn-default btn-sm" onClick={onClickNext}>
-            <i className="fa fa-arrow-right" aria-hidden="true"/>Try Again!
-          </button>
           .
         </p>
+        <p><button className="btn btn-default btn-sm" onClick={onClickNext}>
+          <i className="fa fa-arrow-right" aria-hidden="true"/>Try Again!
+        </button></p>
       </div>
     </div>
   );
