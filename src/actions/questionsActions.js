@@ -56,6 +56,6 @@ export function userAnswer(questionAnswer) {
 
 export function getNextQuestion() {
   return (dispatch, getState) => {
-    dispatch(nextQuestion(getState().questions));
+    setTimeout(() => dispatch(nextQuestion(getState().questions)), 500);
   }
 }
