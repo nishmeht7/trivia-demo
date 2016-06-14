@@ -15,4 +15,3 @@ npm start -s
 
 - `npm start` run the web app with lint and tests in watch mode
 - `npm run lint` linting javascript code usig eslint
-- `npm run test` test using mocha and enzyme
