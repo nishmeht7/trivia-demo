@@ -9,7 +9,9 @@
     "test": "mocha --reporter progress tools/testSetup.js src/*.test.js",
     "test:watch": "npm run test -- --watch",
     "lint": "node_modules/.bin/esw webpack.config.* tools src",
-    "lint:watch": "npm run lint -- --watch"
+    "lint:watch": "npm run lint -- --watch",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "keywords": [
     "react",
@@ -79,10 +81,12 @@
     "react-router-redux": "^4.0.4",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
-    "toastr": "^2.1.2"
+    "toastr": "^2.1.2",
+    "snyk": "^1.189.0"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/gaearon/react-hot-boilerplate.git"
-  }
+  },
+  "snyk": true
 }
